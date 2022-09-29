@@ -5,7 +5,10 @@ on:
 
 jobs:
   build-fc36:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        runner-size: [ubuntu-latest, focal-4core, focal-8core, focal-16core, focal-32core, focal-64core]
+    runs-on: ${{ matrix.runner }}
     name: Build Fedora 36 kernel with ACS override patch
     steps:
       - name: Checkout this repo
@@ -34,7 +37,10 @@ jobs:
             !/home/runner/work/_temp/_github_home/rpmbuild/RPMS/x86_64/*debug*.rpm
 
   build-fc35:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        runner-size: [ubuntu-latest, focal-4core, focal-8core, focal-16core, focal-32core, focal-64core]
+    runs-on: ${{ matrix.runner }}
     name: Build Fedora 35 kernel with ACS override patch
     steps:
       - name: Checkout this repo
